@@ -1,33 +1,25 @@
-.card img {
- width: 300px;
- height: 300px;
- border-radius: 12px;
-}
-
-h1{
-    text-align: center;
-}
-
-
-.container {
-    text-align: center;
-    padding-left: 35%;
-    background-color: deepskyblue;
-}
-.title{
-    background-color: aquamarine;
+body{
+    background: gold;
 }
 
 .card{
-    background-color: rgb(67, 176, 28);
-    padding: 20px;
+    background-color: aquamarine;
+    border-radius: 10px;
     width: 350px;
-    height: 350px;
-    border-radius: 50px;
+    height: 250px;
+    padding: 30px;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 50px;
     overflow: hidden;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-  }
+.title{
+    text-align: center;;
+}
 
+ .card:hover {
+    transform: translateY(-10px);
+  }

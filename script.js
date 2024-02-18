@@ -1,30 +1,49 @@
-const catsContainer = document.getElementById("catsContainer");
+const apiContainer = document.getElementById('apiContainer');
 
-fetch("https://api.thecatapi.com/v1/images/search?limit=20")
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Response not received");
+fetch('https://api.publicapis.org/entries')
+.then((response)=>{
+    if(!response.ok){
+        console.error('Network was not responsive')
     }
-    return response.json();
-  })
-  .then((data) => {
-    data.forEach((cat) => {
-      const card = document.createElement("div");
-      card.classList.add("card");
+    return response.json()
+})
+.then((data)=>{
+    data.entries.forEach((entry) => {
+        const card = document.createElement("div");
+        card.classList.add('card');
+        
+        const authID = document.createElement('h1');
+        authID.textContent = `ID:  ${entry.API}`
 
-      const id = document.createElement("h1");
-      id.textContent = `ID: ${cat.id}`;
+        const description = document.createElement('p');
+        description.textContent = `Description: ${entry.Description}`
 
-      const image = document.createElement("img");
-      image.src = cat.url;
-      image.alt = `Cat ${cat.id}`;
+        const https = document.createElement('p');
+        https.textContent = `HTTPS: ${entry.HTTPS}`
 
-      card.appendChild(image);
-      card.appendChild(id);
+        const cors = document.createElement('p');
+        cors.textContent = `Cors: ${entry.Cors}`
 
-      catsContainer.appendChild(card);
+        const category = document.createElement('p');
+        category.textContent = `Category: ${entry.Category}`
+
+        const link = document.createElement('a');
+        link.href = entry.Link;
+        link.textContent = `Link: ${entry.Link}`
+
+        card.appendChild(authID);
+        card.appendChild(description);
+        card.appendChild(https);
+        card.appendChild(cors);
+        card.appendChild(link);
+        card.appendChild(category);
+        
+        apiContainer.appendChild(card);
+
     });
-  })
-  .catch((error) => {
-    console.error("There was a problem fetching the cat data:", error);
-  });
+})
+.catch((error)=>{
+    console.error('A problem while fetching the data')
+})
+
+
