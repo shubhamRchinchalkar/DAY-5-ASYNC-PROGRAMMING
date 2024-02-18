@@ -1,30 +1,48 @@
-const catsContainer = document.getElementById("catsContainer");
+const booksContainer = document.getElementById("booksContainer");
 
-fetch("https://api.thecatapi.com/v1/images/search?limit=20")
+
+fetch("https://www.abibliadigital.com.br/api/books")
   .then((response) => {
     if (!response.ok) {
-      throw new Error("Response not received");
+      console.error("Network was not good");
     }
     return response.json();
   })
   .then((data) => {
-    data.forEach((cat) => {
+    data.forEach((book) => {
       const card = document.createElement("div");
       card.classList.add("card");
 
-      const id = document.createElement("h1");
-      id.textContent = `ID: ${cat.id}`;
+      const name = document.createElement("h1");
+      name.textContent = `Name: ${book.name}`;
 
-      const image = document.createElement("img");
-      image.src = cat.url;
-      image.alt = `Cat ${cat.id}`;
+      const cardContent = document.createElement("div");
 
-      card.appendChild(image);
-      card.appendChild(id);
+      const group = document.createElement("div");
+      group.textContent = `Group: ${book.group}`;
 
-      catsContainer.appendChild(card);
+      const chapters = document.createElement("div");
+      chapters.textContent = `Chapters: ${book.chapters}`;
+
+      const testament = document.createElement("div");
+      testament.textContent = `Testament: ${book.testament}`;
+
+      const author = document.createElement("div");
+      author.textContent = `Author: ${book.author}`;
+
+      cardContent.appendChild(group);
+      cardContent.appendChild(chapters);
+      cardContent.appendChild(testament);
+      cardContent.appendChild(author);
+
+      card.appendChild(name);
+      card.appendChild(cardContent);
+
+      booksContainer.appendChild(card);
     });
   })
   .catch((error) => {
-    console.error("There was a problem fetching the cat data:", error);
+    console.error("There was a problem while fetching data:", error);
   });
+
+
